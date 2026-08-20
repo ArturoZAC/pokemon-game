@@ -8,7 +8,7 @@
     <h1 class="mb-10">Quien es este pokemon?</h1>
     <h1 class="mb-10">{{ randomPokemon }}</h1>
 
-    <PokemonPicture />
+    <PokemonPicture :pokemon-id="randomPokemon?.id!" />
 
     <PokemonOptions />
   </section>

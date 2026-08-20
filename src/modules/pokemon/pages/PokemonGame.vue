@@ -1,5 +1,8 @@
 <template>
-  <section v-if="isLoading" class="flex flex-col justify-center items-center w-screen h-screen">
+  <section
+    v-if="isLoading || randomPokemon?.id === null"
+    class="flex flex-col justify-center items-center w-screen h-screen"
+  >
     <h1 class="text-3xl">Espere por favor</h1>
     <h3 class="animate-pulse">Cargando pokemones</h3>
   </section>
@@ -8,7 +11,10 @@
     <h1 class="mb-10">Quien es este pokemon?</h1>
     <h1 class="mb-10">{{ randomPokemon }}</h1>
 
-    <PokemonPicture :pokemon-id="randomPokemon?.id!" />
+    <PokemonPicture
+      :pokemon-id="randomPokemon?.id!"
+      :show-pokemon="gameStatus !== GameStatus.PLAYING"
+    />
 
     <PokemonOptions />
   </section>
@@ -18,6 +24,7 @@
   import PokemonOptions from "../components/PokemonOptions.vue";
   import PokemonPicture from "../components/PokemonPicture.vue";
   import { usePokemonGame } from "../composables/usePokemonGame.ts";
+  import { GameStatus } from "../interfaces/game-status.enum.ts";
 
   const { gameStatus, randomPokemon, isLoading } = usePokemonGame();
 </script>

@@ -1,6 +1,7 @@
 <template>
   <section>
-    <img :src="pokemonImage" class="brightness-0 h-50 select-none" />
+    <img v-if="!showPokemon" :src="pokemonImage" class="brightness-0 h-50 select-none" />
+    <img v-else :key="pokemonId" :src="pokemonImage" class="fade-in h-50 select-none" />
   </section>
 </template>
 
@@ -9,9 +10,12 @@
 
   interface Props {
     pokemonId: number;
+    showPokemon?: boolean;
   }
 
-  const props = defineProps<Props>();
+  const props = withDefaults(defineProps<Props>(), {
+    showPokemon: false,
+  });
 
   const pokemonImage = computed(
     () =>

@@ -9,7 +9,16 @@
 
   <section v-else class="flex flex-col justify-center items-center w-screen h-screen">
     <h1 class="mb-10">Quien es este pokemon?</h1>
-    <h1 class="mb-10 capitalize">{{ gameStatus }}</h1>
+
+    <div class="h-20">
+      <button
+        v-if="gameStatus !== GameStatus.PLAYING"
+        @click="getNextOptions(4)"
+        class="bg-blue-500 text-white p-2 rounded-md cursor-pointer"
+      >
+        ¿Jugar de nuevo?
+      </button>
+    </div>
 
     <PokemonPicture
       :pokemon-id="randomPokemon?.id!"
@@ -31,5 +40,6 @@
   import { usePokemonGame } from "../composables/usePokemonGame.ts";
   import { GameStatus } from "../interfaces/game-status.enum.ts";
 
-  const { gameStatus, randomPokemon, isLoading, pokemonsOptions, checkAnswer } = usePokemonGame();
+  const { gameStatus, randomPokemon, isLoading, pokemonsOptions, checkAnswer, getNextOptions } =
+    usePokemonGame();
 </script>

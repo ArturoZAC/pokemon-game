@@ -1,20 +1,32 @@
 <template>
-  <section class="mt-5">
-    <ul>
-      <li>Pokemon 01</li>
-      <li>Pokemon 02</li>
-      <li>Pokemon 03</li>
-      <li>Pokemon 04</li>
-    </ul>
+  <section class="mt-5 flex flex-col">
+    <button
+      @click="$emit('selectedOption', id)"
+      v-for="{ name, id } in options"
+      :key="id"
+      class="capitalize"
+    >
+      {{ name }}
+    </button>
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import type { Pokemon } from "../interfaces/pokemon.interface";
+
+  interface Props {
+    options: Pokemon[];
+  }
+
+  defineProps<Props>();
+
+  defineEmits<{ selectedOption: [id: number] }>();
+</script>
 
 <style scoped>
   @reference "tailwindcss";
 
-  li {
+  button {
     @apply bg-white shadow-md rounded-lg p-3 m-2 cursor-pointer w-40 text-center transition-all hover:bg-gray-100;
   }
 </style>

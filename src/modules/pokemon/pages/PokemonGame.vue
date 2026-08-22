@@ -16,7 +16,7 @@
       :show-pokemon="gameStatus !== GameStatus.PLAYING"
     />
 
-    <PokemonOptions />
+    <PokemonOptions :options="pokemonsOptions" @selected-option="onSelectedOptions" />
   </section>
 </template>
 
@@ -26,5 +26,9 @@
   import { usePokemonGame } from "../composables/usePokemonGame.ts";
   import { GameStatus } from "../interfaces/game-status.enum.ts";
 
-  const { gameStatus, randomPokemon, isLoading } = usePokemonGame();
+  const { gameStatus, randomPokemon, isLoading, pokemonsOptions } = usePokemonGame();
+
+  const onSelectedOptions = (value: number) => {
+    console.log({ value });
+  };
 </script>
